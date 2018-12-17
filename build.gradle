@@ -1,0 +1,43 @@
+buildscript {
+	ext {
+		springBootVersion = '2.1.1.RELEASE'
+	}
+	repositories {
+		mavenLocal()
+		maven { url "https://artifacts.mastercard.int/artifactory/maven-all" }
+		maven { url "https://artifacts.mastercard.int/artifactory/snapshots-all" }
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.mastercard'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenLocal()
+	maven { url "https://artifacts.mastercard.int/artifactory/maven-all" }
+	maven { url "https://artifacts.mastercard.int/artifactory/snapshots-all" }
+}
+
+ext['springCloudVersion'] = 'Greenwich.RC1'
+
+dependencies {
+	implementation('org.springframework.cloud:spring-cloud-starter-config')
+	implementation('org.springframework.boot:spring-boot-starter-web')
+	runtimeOnly('com.h2database:h2')
+	testImplementation('org.springframework.boot:spring-boot-starter-test')
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
