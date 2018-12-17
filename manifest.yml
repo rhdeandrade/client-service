@@ -1,0 +1,4 @@
+applications:
+- name: client-server
+  memory: 1GB
+  instances: 1
