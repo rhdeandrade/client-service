@@ -5,4 +5,4 @@ spring:
     active: prod
   cloud:
     config:
-      server: http://localhost:8888/config-service/
+      server: http://localhost:8888
